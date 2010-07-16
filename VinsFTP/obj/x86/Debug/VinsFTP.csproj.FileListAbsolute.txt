@@ -1,0 +1,9 @@
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\bin\Debug\VinsFTP.exe
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\bin\Debug\VinsFTP.pdb
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\VinsFTP.Form1.resources
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\VinsFTP.Properties.Resources.resources
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\VinsFTP.exe
+c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\VinsFTP.pdb
