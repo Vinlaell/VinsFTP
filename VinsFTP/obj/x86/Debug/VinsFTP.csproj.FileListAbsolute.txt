@@ -7,3 +7,4 @@ c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\De
 c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\GenerateResource.write.1.tlog
 c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\VinsFTP.exe
 c:\users\justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\obj\x86\Debug\VinsFTP.pdb
+C:\Users\Justin\documents\visual studio 2010\Projects\VinsFTP\VinsFTP\bin\Debug\VinsFTP.exe.config
