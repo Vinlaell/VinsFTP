@@ -12,7 +12,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="kb" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">2000</Value>
     </Setting>
     <Setting Name="split" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -21,7 +21,16 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="destination" Type="System.String" Scope="User">
-      <Value Profile="(Default)">(no destination set)</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="localdir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="dlname" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="dlsize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

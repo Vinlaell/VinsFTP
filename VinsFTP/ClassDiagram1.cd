@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VinsFTP.Form1" Collapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAABCAAASAAADzI4w7AQwAUOUCAIEAAAE=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VinsFTP.Program" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VinsFTP.Properties.Resources" Collapsed="true">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VinsFTP.Properties.Settings" Collapsed="true">
+    <Position X="8.25" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAIEAAAAIAAAABABAAAAAAgABAAAAQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VinsFTP.RefreshRemoteList">
+    <Position X="4.25" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RefreshRemoteList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VinsFTP.RefreshLocalList">
+    <Position X="4.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RefreshLocalList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Configuration.ApplicationSettingsBase" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="VinsFTP.GetRemoteFileSize">
+    <Position X="6.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GetRemoteFileSize.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VinsFTP.GetRemoteFileDate">
+    <Position X="6.25" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GetRemoteFileDate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -61,7 +61,7 @@ namespace VinsFTP.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
         public string kb {
             get {
                 return ((string)(this["kb"]));
@@ -97,13 +97,49 @@ namespace VinsFTP.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(no destination set)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string destination {
             get {
                 return ((string)(this["destination"]));
             }
             set {
                 this["destination"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string localdir {
+            get {
+                return ((string)(this["localdir"]));
+            }
+            set {
+                this["localdir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dlname {
+            get {
+                return ((string)(this["dlname"]));
+            }
+            set {
+                this["dlname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int dlsize {
+            get {
+                return ((int)(this["dlsize"]));
+            }
+            set {
+                this["dlsize"] = value;
             }
         }
     }
