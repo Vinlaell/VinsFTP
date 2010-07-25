@@ -20,7 +20,7 @@ namespace VinsFTP
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         public void Download(string dlname)
@@ -50,6 +50,7 @@ namespace VinsFTP
 
                 byte[] buffer = new byte[bufferSize];
                 int y = 0;
+                int buf = 0;
                 readCount = ftpStream.Read(buffer, 0, bufferSize);
                 //loop to do the actual transfer
                 while (readCount > 0)
@@ -58,9 +59,10 @@ namespace VinsFTP
                     outputStream.Write(buffer, 0, readCount);
                     readCount = ftpStream.Read(buffer, 0, bufferSize);
                     // if statement to reduce number of times reportprogress gets called to save some cpu
+                    buf += bufferSize;
                     if (y == 5)
                     //execute backgroundwoeker.reportprogress to send number of bytes sent to main form to update progress bar
-                    backgroundWorker1.ReportProgress(bufferSize);
+                    backgroundWorker1.ReportProgress(buf);
                     y++;
                     if (y > 5)
                         y = 0;
