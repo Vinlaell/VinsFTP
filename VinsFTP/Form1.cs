@@ -164,7 +164,7 @@ namespace VinsFTP
 
         public void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //bug: still trying to apply a value larger than maximum of progress bar
+            //bug:(fixed i think) still trying to apply a value larger than maximum of progress bar
             if (e.ProgressPercentage > Properties.Settings.Default.dlsize)
                 toolStripProgressBar1.Value = Properties.Settings.Default.dlsize;
             else
