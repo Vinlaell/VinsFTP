@@ -98,18 +98,6 @@ namespace VinsFTP.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string destination {
-            get {
-                return ((string)(this["destination"]));
-            }
-            set {
-                this["destination"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string localdir {
             get {
                 return ((string)(this["localdir"]));
@@ -140,6 +128,46 @@ namespace VinsFTP.Properties {
             }
             set {
                 this["dlsize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hidechunks {
+            get {
+                return ((bool)(this["hidechunks"]));
+            }
+            set {
+                this["hidechunks"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>null</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection rnamelist {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["rnamelist"]));
+            }
+            set {
+                this["rnamelist"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>empty</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection lnamelist {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["lnamelist"]));
+            }
+            set {
+                this["lnamelist"] = value;
             }
         }
     }

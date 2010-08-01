@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="for progressbar">
+    <Position X="6.656" Y="3.156" Height="0.354" Width="1.231" />
+  </Comment>
   <Class Name="VinsFTP.Form1" Collapsed="true">
     <Position X="3.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAABCAAASAAADzI4w7AQwAUOUCAIEAAAE=</HashCode>
+      <HashCode>AAQAAAAAACAAABGAAASAAADzI4w7AQwAUOUGAIEAAAE=</HashCode>
       <FileName>Form1.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -23,21 +26,7 @@
   <Class Name="VinsFTP.Properties.Settings" Collapsed="true">
     <Position X="8.25" Y="2.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAIEAAAAIAAAABABAAAAAAgABAAAAQA=</HashCode>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VinsFTP.RefreshRemoteList">
-    <Position X="4.25" Y="4" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RefreshRemoteList.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VinsFTP.RefreshLocalList">
-    <Position X="4.25" Y="2.75" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RefreshLocalList.cs</FileName>
+      <HashCode>IAAAAAAAAAQAAAIEABAAIIAAABARAAhCGAgAAAAAAQA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="System.Object" Collapsed="true">
@@ -56,15 +45,15 @@
   <Class Name="VinsFTP.GetRemoteFileSize">
     <Position X="6.25" Y="2.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GetRemoteFileSize.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VinsFTP.GetRemoteFileDate">
-    <Position X="6.25" Y="4" Width="1.75" />
+  <Class Name="VinsFTP.RefreshListing">
+    <Position X="3" Y="2.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>GetRemoteFileDate.cs</FileName>
+      <HashCode>AAAAAEAAAhAIAAAAAAAAAAAAAAAABAAAAAQgAAAAAAA=</HashCode>
+      <FileName>RefreshListing.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
