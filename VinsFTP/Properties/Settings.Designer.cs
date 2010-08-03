@@ -170,5 +170,29 @@ namespace VinsFTP.Properties {
                 this["lnamelist"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool usereco {
+            get {
+                return ((bool)(this["usereco"]));
+            }
+            set {
+                this["usereco"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool usetts {
+            get {
+                return ((bool)(this["usetts"]));
+            }
+            set {
+                this["usetts"] = value;
+            }
+        }
     }
 }

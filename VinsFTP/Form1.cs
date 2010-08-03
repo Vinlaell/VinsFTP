@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
+using System.Speech.Synthesis;
+using System.Speech.Recognition;
 
 namespace VinsFTP
 {
@@ -17,10 +19,21 @@ namespace VinsFTP
         {
             InitializeComponent();
         }
+                    
+        SpeechSynthesizer speech = new SpeechSynthesizer();
+        SpeechRecognitionEngine recognitionEngine; 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            Initialize();
+            if (VinsFTP.Properties.Settings.Default.usereco == true)
+            {
+                recognitionEngine.UnloadAllGrammars();
+
+                Grammar cg = CreateSampleGrammar();
+                recognitionEngine.LoadGrammar(cg);
+                recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+            }
         }
 
         public void Download(string dlname)
@@ -89,8 +102,8 @@ namespace VinsFTP
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //execute local and remote GetFileList() functions to create 2 string arrays containing lists of files of both dirs
-            //GetRemoteFileSize rfsize = new GetRemoteFileSize();
+            if (VinsFTP.Properties.Settings.Default.usetts == true)
+                speech.SpeakAsync("Connecting");
             RefreshListing refresher = new RefreshListing();
             int x = 0;
             int y = 0;
@@ -155,6 +168,8 @@ namespace VinsFTP
                 //start backgroundworker to download on a seperate thread so main form stays responsive
                 backgroundWorker1.RunWorkerAsync();
                 toolStripStatusLabel1.Text = "Downloading:";
+                if (VinsFTP.Properties.Settings.Default.usetts == true)
+                speech.SpeakAsync("Downloading");
                 toolStripStatusLabel2.Text = listView2.SelectedItems[0].Text;
             }
             else
@@ -183,6 +198,8 @@ namespace VinsFTP
             //are smaller than the buffer itself) and then a moment later reset bar(s) to 0
             toolStripProgressBar1.Maximum = 100;
             toolStripProgressBar1.Value = 100;
+            if (VinsFTP.Properties.Settings.Default.usetts == true)
+                speech.SpeakAsync("Download complete");
             System.Threading.Thread.Sleep(500);
             toolStripProgressBar1.Value = 0;
             toolStripStatusLabel1.Text = "Idle:";
@@ -204,7 +221,71 @@ namespace VinsFTP
                 toolStripProgressBar2.Visible = false;
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //show options dialog
+            Form2 frm = new Form2();
+            frm.Show();
+        }
 
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+            try
+            {
+                recognitionEngine.UnloadAllGrammars();
+
+                Grammar cg = CreateSampleGrammar();
+                recognitionEngine.LoadGrammar(cg);
+                recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            }
+            else
+            {
+                recognitionEngine.RecognizeAsyncStop();
+            }
+        }
+
+        private void Initialize()
+        {
+            recognitionEngine = new SpeechRecognitionEngine();
+            recognitionEngine.SetInputToDefaultAudioDevice();
+            recognitionEngine.SpeechRecognized += (s, args) =>
+            {
+                foreach (RecognizedWordUnit word in args.Result.Words)
+                {
+                    // You can change the minimun confidence level here
+                    if (word.Confidence > 0.8f)
+                    {
+                        switch (word.Text)
+                        {
+                            case "Download": button6.PerformClick();break;
+                            case "speech": checkBox4.Checked = true; break;
+                            case "Refresh": button1.PerformClick(); break;
+                            case "recognition": checkBox5.Checked = false; recognitionEngine.RecognizeAsyncStop(); break;
+                            case "Connect": button1.PerformClick(); break;
+                            case "select remote": listView2.Select(); break;
+                                
+                        }
+                    }
+                }
+            };
+        }
+
+        private Grammar CreateSampleGrammar()
+        {
+            Choices commandChoices = new Choices("Download", "speech", "recognition", "Refresh","Connect","select remote");
+            GrammarBuilder grammarBuilder = new GrammarBuilder("ftp");
+            grammarBuilder.Append(commandChoices);
+            Grammar g = new Grammar(grammarBuilder);
+            g.Name = "Available programs";
+            return g;
+        }
 
     }
 }
