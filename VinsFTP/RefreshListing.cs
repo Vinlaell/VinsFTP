@@ -24,6 +24,7 @@ namespace VinsFTP
             string ftpPassword = Properties.Settings.Default.pass;
             StringBuilder result = new StringBuilder();
             FtpWebRequest reqFTP;
+            int x = 0;
             try
             {
                 //make a ftpwebrequest
@@ -38,28 +39,26 @@ namespace VinsFTP
                 StreamReader(response.GetResponseStream());
                 string line = reader.ReadLine();
                 while (line != null)
-                    //bug FIX this filter!
                 {
                     if (VinsFTP.Properties.Settings.Default.hidechunks != true)
                     {
-                        result.Append(line);
-                        result.Append("\n");
+                        result.AppendLine(line);
                     }
                     else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
                     {
                         if (line.Substring(line.Length - 7) == "001.cnk")
-                    {
-                        result.Append(line);
-                        result.Append("\n");
+                        {
+                            result.AppendLine(line);
+                        }
+                        if (line.Substring(line.Length - 4) != ".cnk")
+                        {
+                            result.AppendLine(line);
+                        }
                     }
-                    if (line.Substring(line.Length - 4) != ".cnk")
-                    {
-                        result.Append(line);
-                        result.Append("\n");
-                    }
-                }
+
                     line = reader.ReadLine();
                 }
+                    x++;
                 // to remove the trailing '\n'
                 result.Remove(result.ToString().LastIndexOf('\n'), 1);
                 reader.Close();
@@ -94,10 +93,10 @@ namespace VinsFTP
             while (x < fiArr.Length)
             {
                                     if (VinsFTP.Properties.Settings.Default.hidechunks != true)
-                    {
-                returns.Append(fiArr[x]);
-                returns.Append("\n");
-                    }
+                                        {
+                                             returns.Append(fiArr[x].Name);
+                                             returns.Append("\n");
+                                        }
                                     else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
                                     {
                                         if (fiArr[x].Name.Substring(fiArr[x].Name.Length - 7) == "001.cnk")
@@ -144,10 +143,29 @@ namespace VinsFTP
                     reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
                     FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
                     long cl = response.ContentLength;
-                    array.SetValue(cl.ToString(), x);
+                    if (response != null)
+                    {
+                        if (VinsFTP.Properties.Settings.Default.hidechunks != true)
+                        {
+                            array.SetValue(cl.ToString(), x);
+                        }
+                        else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
+                        {
+                            if (name.Substring(name.Length - 7) == "001.cnk")
+                            {
+                                array.SetValue(cl.ToString(), x);
+                                continue;
+                            }
+                            if (name.Substring(name.Length - 4) != ".cnk")
+                            {
+                                array.SetValue(cl.ToString(), x);
+                            }
+                        }
+                    }
                     response.Close();
 
                 }
+
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
@@ -166,8 +184,22 @@ namespace VinsFTP
             FileInfo[] fiArr = di.GetFiles();
             foreach (FileInfo file in fiArr)
             {
-                //bug FIX this
-                array.SetValue(file.Length.ToString(), x);
+                if (VinsFTP.Properties.Settings.Default.hidechunks != true)
+                {
+                    array.SetValue(file.Length.ToString(), x);
+                }
+                else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
+                {
+                    if (file.Name.Substring(file.Name.Length - 7) == "001.cnk")
+                    {
+                        array.SetValue(file.Length.ToString(), x);
+                        continue;
+                    }
+                    if (file.Name.Substring(file.Name.Length - 4) != ".cnk")
+                    {
+                        array.SetValue(file.Length.ToString(), x);
+                    }
+                }
                 x++;
             }
             return array;
@@ -182,7 +214,23 @@ namespace VinsFTP
             FileInfo[] fiArr = di.GetFiles();
             foreach (FileInfo file in fiArr)
             {
-                array.SetValue(file.LastWriteTime.ToString(), x);
+                //same here!
+                if (VinsFTP.Properties.Settings.Default.hidechunks != true)
+                {
+                    array.SetValue(file.LastWriteTime.ToString(), x);
+                }
+                else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
+                {
+                    if (file.Name.Substring(file.Name.Length - 7) == "001.cnk")
+                    {
+                        array.SetValue(file.LastWriteTime.ToString(), x);
+                        continue;
+                    }
+                    if (file.Name.Substring(file.Name.Length - 4) != ".cnk")
+                    {
+                        array.SetValue(file.LastWriteTime.ToString(), x);
+                    }
+                }
                 x++;
             }
             return array;
@@ -210,16 +258,35 @@ namespace VinsFTP
                     reqFTP.UseBinary = true;
                     reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
                     FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
-                    array.SetValue(response.LastModified.ToString(),x);
-                    response.Close();
 
+                    array.SetValue(response.LastModified.ToString(),x);
+                    if (VinsFTP.Properties.Settings.Default.hidechunks != true)
+                    {
+                        array.SetValue(response.LastModified.ToString(), x);
+                    }
+                    else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
+                    {
+                        if (name.Substring(name.Length - 7) == "001.cnk")
+                        {
+                            array.SetValue(response.LastModified.ToString(), x);
+                            continue;
+                        }
+                        if (name.Substring(name.Length - 4) != ".cnk")
+                        {
+                            array.SetValue(response.LastModified.ToString(), x);
+                        }
+                    }
+                    response.Close();
                 }
+
+
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
                 x++;
-            }
+        }
+
             return array;
         }
     }

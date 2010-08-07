@@ -6,7 +6,7 @@
   <Class Name="VinsFTP.Form1" Collapsed="true">
     <Position X="3.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAABGAAASAAADzI4w7AQwAUOUGAIEAAAE=</HashCode>
+      <HashCode>AAQAAAAAACIAARGAAASAAADzI8w7AQwAUOUOAIEAAAE=</HashCode>
       <FileName>Form1.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -26,7 +26,7 @@
   <Class Name="VinsFTP.Properties.Settings" Collapsed="true">
     <Position X="8.25" Y="2.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAQAAAIEABAAIIAAABARAAhCGAgAAAAAAQA=</HashCode>
+      <HashCode>IAAAAAAABAAAAAIEABAAIIAAEBABAAhAEAgAAAAAAQA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="System.Object" Collapsed="true">
