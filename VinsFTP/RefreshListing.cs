@@ -38,9 +38,26 @@ namespace VinsFTP
                 StreamReader(response.GetResponseStream());
                 string line = reader.ReadLine();
                 while (line != null)
+                    //bug FIX this filter!
                 {
-                    result.Append(line);
-                    result.Append("\n");
+                    if (VinsFTP.Properties.Settings.Default.hidechunks != true)
+                    {
+                        result.Append(line);
+                        result.Append("\n");
+                    }
+                    else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
+                    {
+                        if (line.Substring(line.Length - 7) == "001.cnk")
+                    {
+                        result.Append(line);
+                        result.Append("\n");
+                    }
+                    if (line.Substring(line.Length - 4) != ".cnk")
+                    {
+                        result.Append(line);
+                        result.Append("\n");
+                    }
+                }
                     line = reader.ReadLine();
                 }
                 // to remove the trailing '\n'
@@ -76,8 +93,24 @@ namespace VinsFTP
             //loop through the array and add each files name to stringbuilder string with a null character after each one(to make a propper array of strings)
             while (x < fiArr.Length)
             {
+                                    if (VinsFTP.Properties.Settings.Default.hidechunks != true)
+                    {
                 returns.Append(fiArr[x]);
                 returns.Append("\n");
+                    }
+                                    else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
+                                    {
+                                        if (fiArr[x].Name.Substring(fiArr[x].Name.Length - 7) == "001.cnk")
+                                        {
+                                            returns.Append(fiArr[x].Name);
+                                            returns.Append("\n");
+                                        }
+                                        if (fiArr[x].Name.Substring(fiArr[x].Name.Length - 4) != ".cnk")
+                                        {
+                                            returns.Append(fiArr[x].Name);
+                                            returns.Append("\n");
+                                        }
+                                    }
                 x++;
             }
             returns.Remove(returns.ToString().LastIndexOf('\n'), 1);
@@ -133,6 +166,7 @@ namespace VinsFTP
             FileInfo[] fiArr = di.GetFiles();
             foreach (FileInfo file in fiArr)
             {
+                //bug FIX this
                 array.SetValue(file.Length.ToString(), x);
                 x++;
             }
