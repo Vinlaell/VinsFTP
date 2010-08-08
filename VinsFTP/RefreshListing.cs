@@ -16,7 +16,7 @@ namespace VinsFTP
             GetLocalFileList();
         }
 
-        public void GetRemoteFileList()
+        public string[] GetRemoteFileList()
         {
             //initialize a ftpwebrequest object and some program settings path variables
             string ftpServerIP = Properties.Settings.Default.host;
@@ -25,8 +25,8 @@ namespace VinsFTP
             StringBuilder result = new StringBuilder();
             FtpWebRequest reqFTP;
             int x = 0;
-            try
-            {
+            //try
+            //{
                 //make a ftpwebrequest
                 reqFTP = (FtpWebRequest)FtpWebRequest.Create
                    (new Uri("ftp://" + ftpServerIP + "/"));
@@ -38,6 +38,7 @@ namespace VinsFTP
                 StreamReader reader = new
                 StreamReader(response.GetResponseStream());
                 string line = reader.ReadLine();
+                //MessageBox.Show(line);
                 while (line != null)
                 {
                     if (VinsFTP.Properties.Settings.Default.hidechunks != true)
@@ -50,7 +51,7 @@ namespace VinsFTP
                         {
                             result.AppendLine(line);
                         }
-                        if (line.Substring(line.Length - 4) != ".cnk")
+                        if (line.Substring(line.Length - 4) != ".cnk" && line.Substring(line.Length - 7) != "001.cnk")
                         {
                             result.AppendLine(line);
                         }
@@ -61,22 +62,26 @@ namespace VinsFTP
                     x++;
                 // to remove the trailing '\n'
                 result.Remove(result.ToString().LastIndexOf('\n'), 1);
-                reader.Close();
-                response.Close();
                 string[] res = result.ToString().Split('\n');
                 VinsFTP.Properties.Settings.Default.rnamelist.Clear();
                 VinsFTP.Properties.Settings.Default.rnamelist.Add("empty");
                 VinsFTP.Properties.Settings.Default.rnamelist.AddRange(res);
                 VinsFTP.Properties.Settings.Default.rnamelist.RemoveAt(0);
-            }
-            catch (Exception ex)
-            {
+                reader.Close();
+                response.Close();
+                return res;
+
+            //}
+            //catch (Exception ex)
+            //{
                 //error happened so show error msg
-                MessageBox.Show(ex.Message);
-            }
+            //    MessageBox.Show(ex.Message);
+            //}
+
+            return null;
         }
 
-        public void GetLocalFileList()
+        public string[] GetLocalFileList()
         {
             //creates and returns a string array of files in selected local directory
             int x = 0;
@@ -94,20 +99,17 @@ namespace VinsFTP
             {
                                     if (VinsFTP.Properties.Settings.Default.hidechunks != true)
                                         {
-                                             returns.Append(fiArr[x].Name);
-                                             returns.Append("\n");
+                                            returns.AppendLine(fiArr[x].Name);
                                         }
                                     else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
                                     {
                                         if (fiArr[x].Name.Substring(fiArr[x].Name.Length - 7) == "001.cnk")
                                         {
-                                            returns.Append(fiArr[x].Name);
-                                            returns.Append("\n");
+                                            returns.AppendLine(fiArr[x].Name);
                                         }
-                                        if (fiArr[x].Name.Substring(fiArr[x].Name.Length - 4) != ".cnk")
+                                        if (fiArr[x].Name.Substring(fiArr[x].Name.Length - 4) != ".cnk" && fiArr[x].Name.Substring(fiArr[x].Name.Length - 7) != "001.cnk")
                                         {
-                                            returns.Append(fiArr[x].Name);
-                                            returns.Append("\n");
+                                            returns.AppendLine(fiArr[x].Name);
                                         }
                                     }
                 x++;
@@ -118,17 +120,22 @@ namespace VinsFTP
             VinsFTP.Properties.Settings.Default.lnamelist.Add("empty");
             VinsFTP.Properties.Settings.Default.lnamelist.AddRange(res);
             VinsFTP.Properties.Settings.Default.lnamelist.RemoveAt(0);
+            return res;
         }
 
         public string[] GetArrayOfRemoteSizes()
         {
-            int count = VinsFTP.Properties.Settings.Default.rnamelist.Count;
-            int x = 0;
-            string[] array = new string[count];
-            foreach (string name in VinsFTP.Properties.Settings.Default.rnamelist)
+            int count = 0;
+            foreach (string name in GetRemoteFileList())
             {
-                try
-                {
+                count++;
+            }
+            int x = 0;
+            string[] array = new string[count+1];
+            foreach (string name in GetRemoteFileList())
+            {
+                //try
+                //{
                     //gets the filesize of file on remote server
                     //grabs some path variables from program settings
                     string ftpServerIP = Properties.Settings.Default.host;
@@ -138,38 +145,38 @@ namespace VinsFTP
                     FtpWebRequest reqFTP;
                     reqFTP = (FtpWebRequest)FtpWebRequest.Create(new
                     Uri("ftp://" + ftpServerIP + "/" + name));
+                    //MessageBox.Show("ftp://" + ftpServerIP + "/" + name);
                     reqFTP.Method = WebRequestMethods.Ftp.GetFileSize;
                     reqFTP.UseBinary = true;
                     reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
                     FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
-                    long cl = response.ContentLength;
+                    string cl = response.ContentLength.ToString();
                     if (response != null)
                     {
                         if (VinsFTP.Properties.Settings.Default.hidechunks != true)
                         {
-                            array.SetValue(cl.ToString(), x);
+                            array.SetValue(cl, x);
                         }
                         else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
                         {
                             if (name.Substring(name.Length - 7) == "001.cnk")
                             {
-                                array.SetValue(cl.ToString(), x);
-                                continue;
+                                array.SetValue(cl, x);
                             }
-                            if (name.Substring(name.Length - 4) != ".cnk")
+                            if (name.Substring(name.Length - 4) != ".cnk" && name.Substring(name.Length - 7) != "001.cnk")
                             {
-                                array.SetValue(cl.ToString(), x);
+                                array.SetValue(cl, x);
                             }
                         }
                     }
                     response.Close();
 
-                }
+                //}
 
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message);
+                //}
                 x++;
             }
             return array;
@@ -179,7 +186,7 @@ namespace VinsFTP
         {
             int count = VinsFTP.Properties.Settings.Default.lnamelist.Count;
             int x = 0;
-            string[] array = new string[count];
+            string[] array = new string[count+1];
             DirectoryInfo di = new DirectoryInfo(Properties.Settings.Default.localdir);
             FileInfo[] fiArr = di.GetFiles();
             foreach (FileInfo file in fiArr)
@@ -187,20 +194,24 @@ namespace VinsFTP
                 if (VinsFTP.Properties.Settings.Default.hidechunks != true)
                 {
                     array.SetValue(file.Length.ToString(), x);
+                    x++;
+                    continue;
                 }
                 else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
                 {
                     if (file.Name.Substring(file.Name.Length - 7) == "001.cnk")
                     {
                         array.SetValue(file.Length.ToString(), x);
+                        x++;
                         continue;
                     }
-                    if (file.Name.Substring(file.Name.Length - 4) != ".cnk")
+                    if (file.Name.Substring(file.Name.Length - 4) != ".cnk" && file.Name.Substring(file.Name.Length - 7) != "001.cnk")
                     {
                         array.SetValue(file.Length.ToString(), x);
+                        x++;
+                        continue;
                     }
                 }
-                x++;
             }
             return array;
         }
@@ -209,29 +220,32 @@ namespace VinsFTP
         {
             int count = VinsFTP.Properties.Settings.Default.lnamelist.Count;
             int x = 0;
-            string[] array = new string[count];
+            string[] array = new string[count+1];
             DirectoryInfo di = new DirectoryInfo(Properties.Settings.Default.localdir);
             FileInfo[] fiArr = di.GetFiles();
             foreach (FileInfo file in fiArr)
             {
-                //same here!
                 if (VinsFTP.Properties.Settings.Default.hidechunks != true)
                 {
                     array.SetValue(file.LastWriteTime.ToString(), x);
+                    x++;
+                    continue;
                 }
                 else if (VinsFTP.Properties.Settings.Default.hidechunks == true)
                 {
                     if (file.Name.Substring(file.Name.Length - 7) == "001.cnk")
                     {
                         array.SetValue(file.LastWriteTime.ToString(), x);
+                        x++;
                         continue;
                     }
-                    if (file.Name.Substring(file.Name.Length - 4) != ".cnk")
+                    if (file.Name.Substring(file.Name.Length - 4) != ".cnk" && file.Name.Substring(file.Name.Length - 7) != "001.cnk")
                     {
                         array.SetValue(file.LastWriteTime.ToString(), x);
+                        x++;
+                        continue;
                     }
                 }
-                x++;
             }
             return array;
         }
@@ -240,11 +254,11 @@ namespace VinsFTP
         {
             int count = VinsFTP.Properties.Settings.Default.rnamelist.Count;
             int x = 0;
-            string[] array = new string[count];
+            string[] array = new string[count+1];
             foreach (string name in VinsFTP.Properties.Settings.Default.rnamelist)
             {
-                try
-                {
+                //try
+                //{
                     //gets the filesize of file on remote server
                     //grabs some path variables from program settings
                     string ftpServerIP = Properties.Settings.Default.host;
@@ -269,21 +283,20 @@ namespace VinsFTP
                         if (name.Substring(name.Length - 7) == "001.cnk")
                         {
                             array.SetValue(response.LastModified.ToString(), x);
-                            continue;
                         }
-                        if (name.Substring(name.Length - 4) != ".cnk")
+                        if (name.Substring(name.Length - 4) != ".cnk" && name.Substring(name.Length - 7) != "001.cnk")
                         {
                             array.SetValue(response.LastModified.ToString(), x);
                         }
                     }
                     response.Close();
-                }
+                //}
 
 
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message);
+                //}
                 x++;
         }
 

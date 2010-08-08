@@ -116,7 +116,13 @@ namespace VinsFTP
                 listView2.Columns.Add("Name",180);
                 listView2.Columns.Add("Size",80);
                 listView2.Columns.Add("Date",135);
-                foreach (string val in VinsFTP.Properties.Settings.Default.lnamelist)
+                ListViewItem lvi2 = new ListViewItem();
+                ListViewItem lvi3 = new ListViewItem();
+                lvi2.Text = "../Upper directory";
+                lvi3.Text = "../Upper directory";
+                listView1.Items.Add(lvi2);
+                listView2.Items.Add(lvi3);
+                foreach (string val in refresher.GetLocalFileList())
                 {
                     ListViewItem lvi = new ListViewItem();
                     lvi.Text = val;
@@ -126,7 +132,7 @@ namespace VinsFTP
                     x++;
                 }
 
-                foreach (string val in VinsFTP.Properties.Settings.Default.rnamelist)
+                foreach (string val in refresher.GetRemoteFileList())
                 {
                     ListViewItem lvi = new ListViewItem();
                     lvi.Text = val;
@@ -155,12 +161,13 @@ namespace VinsFTP
         private void button6_Click(object sender, EventArgs e)
         {   
             //download button clicked
+            if (listView2.SelectedItems.Count == 0) { MessageBox.Show("No file selected"); return; }
             if (VinsFTP.Properties.Settings.Default.split == false)
             {
                 //initialize GetRemoteFileSize function
                 GetRemoteFileSize rsize = new GetRemoteFileSize();
                 //set program property string "dlname" to the selected files name
-                Properties.Settings.Default.dlname = listView2.SelectedItems[0].Text;
+                VinsFTP.Properties.Settings.Default.dlname = listView2.SelectedItems[0].Text.Remove(listView2.SelectedItems[0].Text.Length - 1, 1);
                 //execute function GetSize() to apply program property int"dlsize" to the size of remote file
                 rsize.GetSize();
                 //set progressbar's max value to the size of remote file
@@ -170,7 +177,7 @@ namespace VinsFTP
                 toolStripStatusLabel1.Text = "Downloading:";
                 if (VinsFTP.Properties.Settings.Default.usetts == true)
                 speech.SpeakAsync("Downloading");
-                toolStripStatusLabel2.Text = listView2.SelectedItems[0].Text;
+                toolStripStatusLabel2.Text = listView2.SelectedItems[0].Text.Remove(listView2.SelectedItems[0].Text.Length - 1, 1);
             }
             else
             {
@@ -180,7 +187,7 @@ namespace VinsFTP
 
         public void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Download(Properties.Settings.Default.dlname);
+            Download(VinsFTP.Properties.Settings.Default.dlname);
         }
 
         public void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
