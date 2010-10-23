@@ -3,10 +3,10 @@
   <Comment CommentText="for progressbar">
     <Position X="6.656" Y="3.156" Height="0.354" Width="1.231" />
   </Comment>
-  <Class Name="VinsFTP.Form1" Collapsed="true">
+  <Class Name="VinsFTP.Form1">
     <Position X="3.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACIAARGAAASAAADzI8w7AQwAUOUOAIEAAAE=</HashCode>
+      <HashCode>AAQAAAAAACIAARGAAASAAADzI8w7AQwAUOUOAIEAQAE=</HashCode>
       <FileName>Form1.cs</FileName>
     </TypeIdentifier>
   </Class>

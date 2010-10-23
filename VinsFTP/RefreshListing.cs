@@ -14,6 +14,7 @@ namespace VinsFTP
         {
             GetRemoteFileList();
             GetLocalFileList();
+
         }
 
         public string[] GetRemoteFileList()

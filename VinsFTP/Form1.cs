@@ -277,6 +277,7 @@ namespace VinsFTP
                             case "recognition": checkBox5.Checked = false; recognitionEngine.RecognizeAsyncStop(); break;
                             case "Connect": button1.PerformClick(); break;
                             case "select remote": listView2.Select(); break;
+                            case "close": closeprog(); break;
                                 
                         }
                     }
@@ -286,12 +287,17 @@ namespace VinsFTP
 
         private Grammar CreateSampleGrammar()
         {
-            Choices commandChoices = new Choices("Download", "speech", "recognition", "Refresh","Connect","select remote");
+            Choices commandChoices = new Choices("Download", "speech", "recognition", "Refresh","Connect","select remote","close");
             GrammarBuilder grammarBuilder = new GrammarBuilder("ftp");
             grammarBuilder.Append(commandChoices);
             Grammar g = new Grammar(grammarBuilder);
             g.Name = "Available programs";
             return g;
+        }
+
+        public void closeprog()
+        {
+            VinsFTP.Form1.ActiveForm.Close();
         }
 
     }
